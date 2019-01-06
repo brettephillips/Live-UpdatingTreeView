@@ -1,7 +1,6 @@
 //Import needed packages
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Button, FormControl, ControlLabel } from 'react-bootstrap';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
 /**
