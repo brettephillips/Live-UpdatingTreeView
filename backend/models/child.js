@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
         },
         number: DataTypes.INTEGER,
-        factory_id: DataTypes.INTEGER.UNSIGNED
     });
 
     Child.associate = function(models) {

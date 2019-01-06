@@ -30,3 +30,14 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  padding-top: 72px;
+  background-color: #1f2042;
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
