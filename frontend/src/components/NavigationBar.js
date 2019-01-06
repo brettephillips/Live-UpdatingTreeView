@@ -1,15 +1,26 @@
+//Import needed packages
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { AddFactoryModal } from './AddFactoryModal';
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavigationBar.css';
 
+/**
+ * Class that will render the navigation bar.
+ */
 export class NavigationBar extends Component {
+    //Render the elements
     render() {
         return (
             <Navbar fixedTop>
                 <Navbar.Header>
-                    <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand>Live-Updating Tree View</Navbar.Brand>
                 </Navbar.Header>
+                <Nav pullRight>
+                    <NavItem>
+                        <AddFactoryModal />
+                    </NavItem>
+                </Nav>
             </Navbar>
         );
     }

@@ -3,11 +3,16 @@ let models = require('../models/index');
 
 /**
  * Function that will get all of the factories
- * from the DB.
+ * from the DB including the factory's child
+ * nodes.
  */
 
 exports.retrieve = (req, res) => {
-    models.Factory.findAll().then(factories => res.json(factories));
+    models.Factory.findAll( {
+        include: {
+            model: models.Child
+        }
+    }).then(factories => res.json(factories));
 };
 
 /**
