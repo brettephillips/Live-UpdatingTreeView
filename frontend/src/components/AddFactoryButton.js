@@ -11,7 +11,7 @@ export class AddFactoryButton extends Component {
     //Render the elements
     render() {
         return(
-            <Button onClick={this.props.handleShow}>Add Factory</Button>
+            <Button onClick={this.props.handleShow} className="pull-right">Add Factory</Button>
         );
     }
 }

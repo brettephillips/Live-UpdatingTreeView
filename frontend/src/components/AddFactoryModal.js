@@ -20,6 +20,7 @@ export class AddFactoryModal extends Component {
       //Bind events
       this.handleShow = this.handleShow.bind(this);
       this.handleClose = this.handleClose.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   
     /**
@@ -39,6 +40,19 @@ export class AddFactoryModal extends Component {
             show: true 
         });
     }
+
+    /**
+     * Function to pass data from the form to
+     * the parent.
+     * 
+     * @param {*} factoryName 
+     * @param {*} lowerBound 
+     * @param {*} upperBound 
+     */
+    handleSubmit(factoryName, lowerBound, upperBound) {
+        this.props.newFactory(factoryName, lowerBound, upperBound);
+        this.handleClose();
+    }
   
     //Render the elements
     render() {
@@ -50,7 +64,7 @@ export class AddFactoryModal extends Component {
                         <Modal.Title>Add Factory</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddFactoryForm />
+                        <AddFactoryForm addFactorySubmit={this.handleSubmit} />
                     </Modal.Body>
                 </Modal>
             </React.Fragment>
