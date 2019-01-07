@@ -11,7 +11,7 @@ export class RemoveFactoryButton extends Component {
     //Render the elements
     render() {
         return(
-            <Button bsStyle="danger" onClick={this.props.handleShow} className="pull-right">Delete</Button>
+            <Button bsStyle="danger" onClick={this.props.deleteFactory} id={this.props.factoryID} className="pull-right">Delete</Button>
         );
     }
 }

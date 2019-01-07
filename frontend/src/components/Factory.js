@@ -21,6 +21,8 @@ export class Factory extends Component {
         this.state = {
             factories: []
         };
+
+        this.deleteFactory = this.deleteFactory.bind(this);
     }
 
     //When the component mounts fetch data from the api
@@ -67,6 +69,43 @@ export class Factory extends Component {
                 console.log(error);
             });
     }
+
+    /**
+     * Factory that will delete a factory.
+     * 
+     * @param {*} event 
+     */
+    deleteFactory(event) {
+        var factId = event.target.id;
+
+        axios.delete('http://localhost:3001/api/factories/'+factId)
+            .then(response => {
+                //If a successfull response, then update the UI
+                if(response.status === 200) {
+                    var index = -1;
+
+                    //Get the index of the factory
+                    for(var i = 0; i < this.state.factories.length; i++) {
+                        if(this.state.factories[i]["id"] == factId) {
+                            index = i;
+                        }
+                    }
+
+                    //If we find the factory, then splice the array and set the state
+                    if(index !== -1) {
+                        this.state.factories.splice(index, 1);
+                        var newArray = this.state.factories;
+
+                        this.setState( {
+                            factories: newArray
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
     
     //Render the elements
     render() {
@@ -74,7 +113,7 @@ export class Factory extends Component {
         let factoriesList = this.state.factories.map(factory =>
             <Panel key={factory.id}>
                 <Panel.Heading>
-                    <RemoveFactoryButton />
+                    <RemoveFactoryButton deleteFactory={this.deleteFactory} factoryID={factory.id} />
                     <GenerateChildrenModal />
                     <Panel.Title toggle>{factory.name}</Panel.Title>
                     <Bound lowerBound={factory.lower_bound} upperBound={factory.upper_bound} />
