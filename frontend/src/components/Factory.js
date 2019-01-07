@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { Child } from './Child';
+import { GenerateChildrenModal } from './GenerateChildrenModal';
+import { RemoveFactoryButton } from './RemoveFactoryButton';
 import { Bound } from './Bound';
 import axios from 'axios';
 import { AddFactoryModal } from './AddFactoryModal';
@@ -72,6 +74,8 @@ export class Factory extends Component {
         let factoriesList = this.state.factories.map(factory =>
             <Panel key={factory.id}>
                 <Panel.Heading>
+                    <RemoveFactoryButton />
+                    <GenerateChildrenModal />
                     <Panel.Title toggle>{factory.name}</Panel.Title>
                     <Bound lowerBound={factory.lower_bound} upperBound={factory.upper_bound} />
                 </Panel.Heading>

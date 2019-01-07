@@ -1,15 +1,15 @@
 //Import needed packages
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { AddFactoryButton } from './AddFactoryButton';
-import { AddFactoryForm } from './AddFactoryForm';
+import { GenerateChildrenButton } from './GenerateChildrenButton';
+import { GenerateChildrenForm } from './GenerateChildrenForm';
 import 'bootstrap/dist/css/bootstrap.css';
 import './AddFactoryButton.css';
 
 /**
  * Class that will handle the modal.
  */
-export class AddFactoryModal extends Component {
+export class GenerateChildrenModal extends Component {
     constructor(props, context) {
       super(props, context);
       //State of the model (whether it is showing or not)
@@ -20,7 +20,6 @@ export class AddFactoryModal extends Component {
       //Bind events
       this.handleShow = this.handleShow.bind(this);
       this.handleClose = this.handleClose.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
   
     /**
@@ -40,31 +39,18 @@ export class AddFactoryModal extends Component {
             show: true 
         });
     }
-
-    /**
-     * Function to pass data from the form to
-     * the parent.
-     * 
-     * @param {*} factoryName 
-     * @param {*} lowerBound 
-     * @param {*} upperBound 
-     */
-    handleSubmit(factoryName, lowerBound, upperBound) {
-        this.props.newFactory(factoryName, lowerBound, upperBound);
-        this.handleClose();
-    }
   
     //Render the elements
     render() {
         return(
             <React.Fragment>
-                <AddFactoryButton handleShow={this.handleShow} />
+                <GenerateChildrenButton handleShow={this.handleShow} />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Factory</Modal.Title>
+                        <Modal.Title>Generate Children</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddFactoryForm addFactorySubmit={this.handleSubmit} />
+                        <GenerateChildrenForm />
                     </Modal.Body>
                 </Modal>
             </React.Fragment>
