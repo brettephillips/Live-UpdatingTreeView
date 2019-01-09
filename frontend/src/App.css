@@ -3,6 +3,10 @@ body {
   background-color: #1f2042;
 }
 
+.btn {
+  margin-right: 3px;
+}
+
 @media screen and (max-width: 768px) {
   body {
     padding-top: 140px;
