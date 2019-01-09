@@ -35,6 +35,7 @@ export class GenerateChildrenForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.props.generateChildrenSubmit(this.state.number);
     }
 
     //Render the elements
@@ -42,9 +43,9 @@ export class GenerateChildrenForm extends Component {
         return(
             <Form horizontal>
                 <FormGroup controlId="formFactoryChildren">
-                    <Col componentClass={ControlLabel} sm={4}>Upper Bound</Col>
+                    <Col componentClass={ControlLabel} sm={4}>Number</Col>
                     <Col sm={8}>
-                        <FormControl type="number" placeholder="How Many Children? (1-15)" min={1} max={15} name="upperBound" onChange={this.handleChange} />
+                        <FormControl type="number" placeholder="How Many Children? (1-15)" min={1} max={15} name="number" onChange={this.handleChange} />
                     </Col>
                 </FormGroup>
                 <FormGroup>

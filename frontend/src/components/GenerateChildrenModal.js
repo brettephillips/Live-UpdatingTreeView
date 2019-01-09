@@ -20,6 +20,7 @@ export class GenerateChildrenModal extends Component {
       //Bind events
       this.handleShow = this.handleShow.bind(this);
       this.handleClose = this.handleClose.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   
     /**
@@ -39,6 +40,17 @@ export class GenerateChildrenModal extends Component {
             show: true 
         });
     }
+
+    /**
+     * Function to pass data from the form to
+     * the parent.
+     * 
+     * @param {*} number
+     */
+    handleSubmit(number) {
+        this.props.removeChildren(number, this.props.childFactoryID);
+        this.handleClose();
+    }
   
     //Render the elements
     render() {
@@ -50,7 +62,7 @@ export class GenerateChildrenModal extends Component {
                         <Modal.Title>Generate Children</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <GenerateChildrenForm />
+                        <GenerateChildrenForm generateChildrenSubmit={this.handleSubmit} />
                     </Modal.Body>
                 </Modal>
             </React.Fragment>
