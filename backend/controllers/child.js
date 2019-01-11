@@ -26,6 +26,7 @@ exports.create = (req, res) => {
     var arr = [];
     //Sanitize the data
     var factId = req.sanitize(req.body.FactoryId);
+    req.body.number = req.sanitize(req.body.number);
 
     for(var i = 0; i < req.body.number; i++) {
         var randomNum = (Math.floor(Math.random() * (req.body.upper_bound - req.body.lower_bound)) + req.body.lower_bound)
