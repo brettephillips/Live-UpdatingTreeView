@@ -10,7 +10,8 @@ export class GenerateChildrenForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            number: 0
+            number: 0,
+            validation: null
         };
 
         //Bind events
@@ -35,14 +36,22 @@ export class GenerateChildrenForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.generateChildrenSubmit(this.state.number);
+
+        //Validate data
+        if(this.state.number > 15 || this.state.number < 1 || this.state.number.length === 0 || isNaN(this.state.number)) {
+            this.setState( {
+                validation: 'error'
+            });
+        } else {
+            this.props.generateChildrenSubmit(this.state.number);
+        }
     }
 
     //Render the elements
     render() {
         return(
             <Form horizontal>
-                <FormGroup controlId="formFactoryChildren">
+                <FormGroup controlId="formFactoryChildren" validationState={this.state.validation}>
                     <Col componentClass={ControlLabel} sm={4}>Number</Col>
                     <Col sm={8}>
                         <FormControl type="number" placeholder="How Many Children? (1-15)" min={1} max={15} name="number" onChange={this.handleChange} />

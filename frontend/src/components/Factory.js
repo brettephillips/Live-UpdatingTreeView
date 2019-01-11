@@ -85,6 +85,9 @@ export class Factory extends Component {
      * @param {*} upperBound 
      */
     addFactory = (factoryName, lowerBound, upperBound) => {
+        lowerBound = parseInt(lowerBound);
+        upperBound = parseInt(upperBound);
+
         axios.post('http://localhost:3001/api/factories', {
                 name: factoryName,
                 lower_bound: lowerBound,
@@ -118,7 +121,7 @@ export class Factory extends Component {
     deleteFactory = (event) => {
         var factId = event.target.id;
 
-        axios.delete('http://localhost:3001/api/factories/'+factId)
+        axios.delete('http://localhost:3001/api/factories/'+parseInt(factId))
             .then(response => {
                 //If a successfull response, then update the UI
                 if(response.status === 200) {
@@ -166,7 +169,7 @@ export class Factory extends Component {
         }
 
         //Call the child function
-        this.child.current.removeChildren(number, factId, factory.lower_bound, factory.upper_bound, () => {
+        this.child.current.removeChildren(parseInt(number), parseInt(factId), parseInt(factory.lower_bound), parseInt(factory.upper_bound), () => {
             //Clear the state, then update the UI with the new data
             //if(number > 0) {
                 this.setState( {
@@ -191,6 +194,10 @@ export class Factory extends Component {
      * @param {*} upperBound 
      */
     editFactory = (factId, name, lowerBound, upperBound) => {
+        factId = parseInt(factId);
+        lowerBound = parseInt(lowerBound);
+        upperBound = parseInt(upperBound);
+
         axios.put('http://localhost:3001/api/factories/'+factId, {
                 name: name,
                 lower_bound: lowerBound,

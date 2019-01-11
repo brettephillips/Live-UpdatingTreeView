@@ -12,7 +12,10 @@ export class EditFactoryForm extends Component {
         this.state = {
             name: this.props.factory.name,
             lowerBound: this.props.factory.lower_bound,
-            upperBound: this.props.factory.upper_bound
+            upperBound: this.props.factory.upper_bound,
+            validationName: null,
+            validationLowerBound: null,
+            validationUpperBound: null
         };
 
         //Bind events
@@ -43,26 +46,45 @@ export class EditFactoryForm extends Component {
      */
     handleSubmit(event) {
         event.preventDefault();
-        this.props.editFactorySubmit(this.state.name, this.state.lowerBound, this.state.upperBound);
+
+        //Validate data
+        if(this.state.name.length === 0) {
+            this.setState( {
+                validationName: 'error'
+            });
+        } else if(this.state.lowerBound.length === 0 || isNaN(this.state.lowerBound)) {
+            this.setState( {
+                validationLowerBound: 'error',
+                validationName: null
+            });
+        } else if(this.state.upperBound.length === 0 || isNaN(this.state.upperBound)) {
+            this.setState( {
+                validationUpperBound: 'error',
+                validationName: null,
+                validationLowerBound: null
+            });
+        } else {
+            this.props.editFactorySubmit(this.state.name, this.state.lowerBound, this.state.upperBound);
+        }
     }
 
     //Render the elements
     render() {
         return(
             <Form horizontal>
-                <FormGroup controlId="formFactoryName">
+                <FormGroup controlId="formFactoryName" validationState={this.state.validationName}>
                     <Col componentClass={ControlLabel} sm={4}>Name</Col>
                     <Col sm={8}>
                         <FormControl type="text" placeholder="Name" name="name" onChange={this.handleChange} value={this.state.name} />
                     </Col>
                 </FormGroup>
-                <FormGroup controlId="formFactoryLowerBound">
+                <FormGroup controlId="formFactoryLowerBound" validationState={this.state.validationLowerBound}>
                     <Col componentClass={ControlLabel} sm={4}>Lower Bound</Col>
                     <Col sm={8}>
                         <FormControl type="number" placeholder="Lower Bound" min={0} name="lowerBound" onChange={this.handleChange} value={this.state.lowerBound} />
                     </Col>
                 </FormGroup>
-                <FormGroup controlId="formFactoryUpperBound">
+                <FormGroup controlId="formFactoryUpperBound" validationState={this.state.validationUpperBound}>
                     <Col componentClass={ControlLabel} sm={4}>Upper Bound</Col>
                     <Col sm={8}>
                         <FormControl type="number" placeholder="Upper Bound" min={0} name="upperBound" onChange={this.handleChange} value={this.state.upperBound} />
