@@ -3,6 +3,8 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let factoryRoutes = require('./routes/factory');
 let childRoutes = require('./routes/child');
+let helmet = require('helmet');
+let sanitizer = require('express-sanitizer');
 let app = express();
 
 //Configure the body-parser
@@ -10,6 +12,10 @@ app.use(bodyParser.urlencoded( {
     extended: true
 }));
 app.use(bodyParser.json());
+
+//Used for security purposes
+app.use(sanitizer());
+app.use(helmet());
 
 //For testing purposes
 app.use(function(req, res, next) {

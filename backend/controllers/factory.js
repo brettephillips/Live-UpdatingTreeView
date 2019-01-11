@@ -21,6 +21,11 @@ exports.retrieve = (req, res) => {
  */
 
 exports.create = (req, res) => {
+    //Sanitize the data
+    req.body.name = req.sanitize(req.body.name);
+    req.body.lower_bound = req.sanitize(req.body.lower_bound);
+    req.body.upper_bound = req.sanitize(req.body.upper_bound);
+
     models.Factory.create( { 
         name: req.body.name, 
         lower_bound: req.body.lower_bound, 
@@ -34,6 +39,12 @@ exports.create = (req, res) => {
  */
 
 exports.update = (req, res) => {
+    //Sanitize the data
+    req.body.name = req.sanitize(req.body.name);
+    req.body.lower_bound = req.sanitize(req.body.lower_bound);
+    req.body.upper_bound = req.sanitize(req.body.upper_bound);
+    req.params.id = req.sanitize(req.params.id);
+
     models.Factory.update( {
         name: req.body.name, 
         lower_bound: req.body.lower_bound, 
@@ -51,6 +62,9 @@ exports.update = (req, res) => {
  */
 
 exports.remove = (req, res) => {
+    //Sanitize the data
+    req.params.id = req.sanitize(req.params.id);
+
     models.Factory.destroy( {
         where: {
             id: req.params.id

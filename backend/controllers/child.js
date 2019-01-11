@@ -7,6 +7,9 @@ let models = require('../models/index');
  */
 
 exports.remove = (req, res) => {
+    //Sanitize the data
+    req.params.id = req.sanitize(req.params.id);
+
     models.Child.destroy( {
         where: {
             FactoryId: req.params.id
@@ -21,7 +24,8 @@ exports.remove = (req, res) => {
 
 exports.create = (req, res) => {
     var arr = [];
-    var factId = req.body.FactoryId;
+    //Sanitize the data
+    var factId = req.sanitize(req.body.FactoryId);
 
     for(var i = 0; i < req.body.number; i++) {
         var randomNum = (Math.floor(Math.random() * (req.body.upper_bound - req.body.lower_bound)) + req.body.lower_bound)
