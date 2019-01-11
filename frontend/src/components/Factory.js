@@ -6,8 +6,9 @@ import { GenerateChildrenModal } from './GenerateChildrenModal';
 import { EditFactoryModal } from './EditFactoryModal';
 import { RemoveFactoryButton } from './RemoveFactoryButton';
 import { Bound } from './Bound';
-import axios from 'axios';
 import { AddFactoryModal } from './AddFactoryModal';
+import socket from 'socket.io-client';
+import axios from 'axios';
 import './Factory.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -20,17 +21,42 @@ export class Factory extends Component {
         super(props);
         //Keep the state of the factories
         this.state = {
-            factories: []
+            factories: [],
+            socket: socket("http://localhost:3001")
         };
 
-        this.removeChildren = this.removeChildren.bind(this);
-        this.deleteFactory = this.deleteFactory.bind(this);
+        //Create reference to child component
         this.child = React.createRef();
     }
 
     //When the component mounts fetch data from the api
     componentDidMount = () => {
         this.getData();
+
+        //Set the socket up for listening when to refresh
+        this.state.socket.on('refresh', (msg) => {
+            //If we are removing children, then we need to set the
+            //factories to empty first
+            if(msg === "removeChildren") {
+                this.setState( {
+                    factories: []
+                });
+            }
+
+            //Get all the data
+            this.getData();
+        });
+    }
+
+    /**
+     * Function that will use the socket and send
+     * a refresh message to server, so that all clients
+     * get notified of a change.
+     * 
+     * @param {*} msg 
+     */
+    sendRefresh = (msg) => {
+        this.state.socket.emit('refresh', msg);
     }
 
     /**
@@ -75,6 +101,9 @@ export class Factory extends Component {
                 this.setState( {
                     factories: newArray
                 });
+
+                //Notify other clients of the change
+                this.sendRefresh();
             })
             .catch(error => {
                 console.log(error);
@@ -110,6 +139,9 @@ export class Factory extends Component {
                         this.setState( {
                             factories: newArray
                         });
+
+                        //Notify other clients of the change
+                        this.sendRefresh();
                     }
                 }
             })
@@ -142,7 +174,10 @@ export class Factory extends Component {
                 });
             //}
 
-            this.getData();      
+            this.getData();
+            
+            //Notify other clients of the change
+            this.sendRefresh("removeChildren");    
         });
     }
 

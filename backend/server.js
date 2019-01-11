@@ -4,6 +4,7 @@
 
 var app = require('./app');
 var http = require('http');
+var socketIO = require('socket.io');
 var models = require('./models');
 
 /**
@@ -18,6 +19,21 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = socketIO(server);
+
+/**
+ * Listen for a connection to the socket
+ */
+
+io.on("connection", (socket) => {
+  console.log("A user is connected");
+  
+  //Listen for a refresh message from the client
+  socket.on('refresh', (msg) => {
+    //Broadcast message to let all clients know they need to update
+    socket.broadcast.emit('refresh', msg);
+  });
+});
 
 // sequelize will sync the models with the database
 models.sequelize.sync().then(function() {
