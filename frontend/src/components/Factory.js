@@ -74,7 +74,6 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -113,7 +112,6 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -153,7 +151,6 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -175,11 +172,9 @@ export class Factory extends Component {
         //Call the child function
         this.child.current.removeChildren(parseInt(number), parseInt(factId), parseInt(factory.lower_bound), parseInt(factory.upper_bound), () => {
             //Clear the state, then update the UI with the new data
-            //if(number > 0) {
-                this.setState( {
-                    factories: []
-                });
-            //}
+            this.setState( {
+                factories: []
+            });
 
             this.getData();
             
@@ -226,17 +221,12 @@ export class Factory extends Component {
                             this.state.factories[i] = obj;
                             var newArray = this.state.factories;
 
-                            //this.setState( {
-                            //    factories: newArray
-                            //}, () => {
-                                this.removeChildren(0, factId);
-                            //});                            
+                            this.removeChildren(0, factId);
                         }
                     }
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 

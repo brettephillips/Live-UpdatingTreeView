@@ -40,7 +40,6 @@ export class Child extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -62,7 +61,6 @@ export class Child extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
             });
     }
 

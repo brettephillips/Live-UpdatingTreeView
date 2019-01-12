@@ -25,9 +25,7 @@ var io = socketIO(server);
  * Listen for a connection to the socket
  */
 
-io.on("connection", (socket) => {
-  console.log("A user is connected");
-  
+io.on("connection", (socket) => {  
   //Listen for a refresh message from the client
   socket.on('refresh', (msg) => {
     //Broadcast message to let all clients know they need to update
@@ -82,11 +80,9 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -103,5 +99,4 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
 }
