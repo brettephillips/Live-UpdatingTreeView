@@ -1,4 +1,4 @@
-.btn-default {
+.btn-default, .btn-default:focus, .btn-default:active:focus {
     background-color: #1f2042;
     border-color: #1b1c3a;
     color: white;

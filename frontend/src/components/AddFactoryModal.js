@@ -26,7 +26,7 @@ export class AddFactoryModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleClose() {
+    handleClose = () => {
         this.setState( { 
             show: false 
         });
@@ -35,7 +35,7 @@ export class AddFactoryModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleShow() {
+    handleShow = () => {
         this.setState( { 
             show: true 
         });
@@ -49,7 +49,7 @@ export class AddFactoryModal extends Component {
      * @param {*} lowerBound 
      * @param {*} upperBound 
      */
-    handleSubmit(factoryName, lowerBound, upperBound) {
+    handleSubmit = (factoryName, lowerBound, upperBound) => {
         this.props.newFactory(factoryName, lowerBound, upperBound);
         this.handleClose();
     }

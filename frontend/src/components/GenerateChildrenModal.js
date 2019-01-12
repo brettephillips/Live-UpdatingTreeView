@@ -26,7 +26,7 @@ export class GenerateChildrenModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleClose() {
+    handleClose = () => {
         this.setState( { 
             show: false 
         });
@@ -35,7 +35,7 @@ export class GenerateChildrenModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleShow() {
+    handleShow = () => {
         this.setState( { 
             show: true 
         });
@@ -47,7 +47,7 @@ export class GenerateChildrenModal extends Component {
      * 
      * @param {*} number
      */
-    handleSubmit(number) {
+    handleSubmit = (number) => {
         this.props.removeChildren(number, this.props.childFactoryID);
         this.handleClose();
     }

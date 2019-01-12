@@ -24,7 +24,7 @@ export class EditFactoryModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleClose() {
+    handleClose = () => {
         this.setState( { 
             show: false 
         });
@@ -33,7 +33,7 @@ export class EditFactoryModal extends Component {
     /**
      * Function that will change the state of the modal
      */
-    handleShow() {
+    handleShow = () => {
         this.setState( { 
             show: true 
         });

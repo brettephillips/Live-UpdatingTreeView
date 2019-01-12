@@ -29,7 +29,7 @@ export class AddFactoryForm extends Component {
      * 
      * @param {*} event 
      */
-    handleChange(event) {
+    handleChange = (event) => {
         const target = event.target;
         
         //Change state
@@ -44,7 +44,7 @@ export class AddFactoryForm extends Component {
      * 
      * @param {*} event 
      */
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         //Validate data

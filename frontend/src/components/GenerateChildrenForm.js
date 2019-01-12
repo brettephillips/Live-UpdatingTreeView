@@ -25,7 +25,7 @@ export class GenerateChildrenForm extends Component {
      * 
      * @param {*} event 
      */
-    handleChange(event) {
+    handleChange = (event) => {
         const target = event.target;
         
         //Change state
@@ -34,7 +34,7 @@ export class GenerateChildrenForm extends Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         //Validate data
