@@ -1,6 +1,6 @@
 //Import needed packages
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, Alert } from 'react-bootstrap';
 import { Child } from './Child';
 import { GenerateChildrenModal } from './GenerateChildrenModal';
 import { EditFactoryModal } from './EditFactoryModal';
@@ -17,14 +17,18 @@ import 'bootstrap/dist/css/bootstrap.css';
  * the factories.
  */
 export class Factory extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         //Keep the state of the factories
         this.state = {
             factories: [],
-            socket: socket("http://localhost:3001")
+            socket: socket("http://localhost:3001"),
+            show: false
         };
 
+        //Create bindings
+        this.handleDismiss = this.handleDismiss.bind(this);
+        this.handleShow = this.handleShow.bind(this);
         //Create reference to child component
         this.child = React.createRef();
     }
@@ -46,6 +50,20 @@ export class Factory extends Component {
             //Get all the data
             this.getData();
         });
+    }
+
+    /**
+     * Handle the closing of the alert
+     */
+    handleDismiss = () => {
+        this.setState({ show: false });
+    }
+
+    /**
+     * Handle the showing of the alert
+     */
+    handleShow = () => {
+        this.setState({ show: true });
     }
 
     /**
@@ -74,6 +92,7 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -112,6 +131,7 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -151,6 +171,7 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -219,7 +240,6 @@ export class Factory extends Component {
                         //Update the state
                         if(this.state.factories[i]["id"] == factId) {
                             this.state.factories[i] = obj;
-                            var newArray = this.state.factories;
 
                             this.removeChildren(0, factId);
                         }
@@ -227,6 +247,7 @@ export class Factory extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -247,13 +268,26 @@ export class Factory extends Component {
                 </Panel.Collapse>
             </Panel>
         );
-
-        return(
-            <div id="factory-wrapper">
-                <h1>Root</h1>
-                {factoriesList}
-                <AddFactoryModal newFactory={this.addFactory} />
-            </div>
-        );
+        
+        if(this.state.show) {
+            return(
+                <div id="factory-wrapper">
+                    <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+                        <p>Something went wrong, please try again!</p>
+                    </Alert>
+                    <h1>Root</h1>
+                    {factoriesList}
+                    <AddFactoryModal newFactory={this.addFactory} />
+                </div>
+            );
+        } else {
+            return(
+                <div id="factory-wrapper">
+                    <h1>Root</h1>
+                    {factoriesList}
+                    <AddFactoryModal newFactory={this.addFactory} />
+                </div>
+            );
+        }
     }
 }

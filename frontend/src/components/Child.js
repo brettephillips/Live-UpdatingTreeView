@@ -1,6 +1,6 @@
 //Import needed packages
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -9,12 +9,31 @@ import 'bootstrap/dist/css/bootstrap.css';
  * specific factory.
  */
 export class Child extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         //Keep the state of the children
         this.state = {
-            children: this.props.children
+            children: this.props.children,
+            show: true
         };
+
+        //Create bindings
+        this.handleDismiss = this.handleDismiss.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+    }
+
+    /**
+     * Handle the closing of the alert
+     */
+    handleDismiss = () => {
+        this.setState({ show: false });
+    }
+
+    /**
+     * Handle the showing of the alert
+     */
+    handleShow = () => {
+        this.setState({ show: true });
     }
 
     /**
@@ -40,6 +59,7 @@ export class Child extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -61,6 +81,7 @@ export class Child extends Component {
                 }
             })
             .catch(error => {
+                this.handleShow();
             });
     }
 
@@ -71,10 +92,21 @@ export class Child extends Component {
             <Panel.Body key={child.id}>{child.number}</Panel.Body>
         );
 
-        return(
-            <React.Fragment>
-                {childList}
-            </React.Fragment>
-        );
+        if(this.state.show) {
+            return(
+                <React.Fragment>
+                    <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+                        <p>Something went wrong, please try again!</p>
+                    </Alert>
+                    {childList}
+                </React.Fragment>
+            );
+        } else {
+            return(
+                <React.Fragment>
+                    {childList}
+                </React.Fragment>
+            );
+        }
     }
 }
