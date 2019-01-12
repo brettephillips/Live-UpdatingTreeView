@@ -63,6 +63,12 @@ export class EditFactoryForm extends Component {
                 validationName: null,
                 validationLowerBound: null
             });
+        } else if(this.state.lowerBound > this.state.upperBound) {
+            this.setState( {
+                validationUpperBound: 'error',
+                validationName: null,
+                validationLowerBound: 'error'
+            });
         } else {
             this.props.editFactorySubmit(this.state.name, this.state.lowerBound, this.state.upperBound);
         }
