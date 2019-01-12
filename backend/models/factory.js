@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         upper_bound: DataTypes.INTEGER
     });
 
-    Factory.associate = function(models) {
+    Factory.associate = (models) => {
         models.Factory.hasMany(models.Child);
     };
 

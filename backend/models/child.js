@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         number: DataTypes.INTEGER,
     });
 
-    Child.associate = function(models) {
+    Child.associate = (models) => {
         models.Child.belongsTo(models.Factory, {
             onDelete: "CASCADE",
             foreignKey: {
