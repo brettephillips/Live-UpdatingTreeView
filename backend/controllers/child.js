@@ -7,14 +7,32 @@ let models = require('../models/index');
  */
 
 exports.remove = (req, res) => {
-    //Sanitize the data
-    req.params.id = req.sanitize(req.params.id);
+    //Object that contains failure reason
+    var error = {
+        type: 'error',
+        reason: ''
+    };
 
-    models.Child.destroy( {
-        where: {
-            FactoryId: req.params.id
-        }
-    }).then(child => res.json(child));
+    //Validation
+    if(typeof req.params.id === 'undefined') {
+        error['reason'] = "Missing property";
+        res.status(400).json(error);
+    } else if(req.params.id === 0) {
+        error['reason'] = "There is a missing value";
+        res.status(400).json(error);
+    } else if(isNaN(req.params.id)) {
+        error['reason'] = "Id must be a number";
+        res.status(400).json(error);
+    } else {
+        //Sanitize the data
+        req.params.id = req.sanitize(req.params.id);
+
+        models.Child.destroy( {
+            where: {
+                FactoryId: req.params.id
+            }
+        }).then(child => res.json(child));
+    }
 };
 
 /**
@@ -24,22 +42,42 @@ exports.remove = (req, res) => {
 
 exports.create = (req, res) => {
     var arr = [];
-    //Sanitize the data
-    var factId = req.sanitize(req.body.FactoryId);
-    req.body.number = req.sanitize(req.body.number);
+    //Object that contains failure reason
+    var error = {
+        type: 'error',
+        reason: ''
+    };
 
-    for(var i = 0; i < req.body.number; i++) {
-        var randomNum = (Math.floor(Math.random() * (req.body.upper_bound - req.body.lower_bound)) + req.body.lower_bound)
-        
-        var obj = {
-            number: randomNum,
-            FactoryId: factId
-        };
+    //Validation
+    if(typeof req.body.FactoryId === 'undefined' || typeof req.body.number === 'undefined') {
+        error['reason'] = "Missing property";
+        res.status(400).json(error);
+    } else if(req.body.FactoryId === 0 || req.body.number === 0) {
+        error['reason'] = "There is a missing value";
+        res.status(400).json(error);
+    } else if(isNaN(req.body.FactoryId) || isNaN(req.body.number)) {
+        error['reason'] = "Id and generation number must be a number";
+        res.status(400).json(error);
+    } else {
+        //Sanitize the data
+        var factId = req.sanitize(req.body.FactoryId);
+        req.body.number = req.sanitize(req.body.number);
 
-        arr.push(obj);
+        //Loop through and push objects to array
+        //Objects contain details for a new child
+        for(var i = 0; i < req.body.number; i++) {
+            var randomNum = (Math.floor(Math.random() * (req.body.upper_bound - req.body.lower_bound)) + req.body.lower_bound)
+            
+            var obj = {
+                number: randomNum,
+                FactoryId: factId
+            };
+
+            arr.push(obj);
+        }
+
+        models.Child.bulkCreate(
+            arr
+        ).then(children => res.json(children));
     }
-
-    models.Child.bulkCreate(
-        arr
-    ).then(children => res.json(children));
 };

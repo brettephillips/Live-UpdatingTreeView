@@ -66,10 +66,12 @@ export class Factory extends Component {
     getData = () => {
         axios.get('http://localhost:3001/api/factories')
             .then(response => {
-                //Set the state of the factories array
-                this.setState( {
-                    factories: response.data
-                });
+                if(response.status === 200) {
+                    //Set the state of the factories array
+                    this.setState( {
+                        factories: response.data
+                    });
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -94,19 +96,21 @@ export class Factory extends Component {
                 upper_bound: upperBound
             })
             .then(response => {
-                //Add a child property to the json obj returned
-                response.data.Children = [];
-                //Create a new array and push the new data onto it
-                var newArray = this.state.factories.slice();
-                newArray.push(response.data);
+                if(response.status === 200) {
+                    //Add a child property to the json obj returned
+                    response.data.Children = [];
+                    //Create a new array and push the new data onto it
+                    var newArray = this.state.factories.slice();
+                    newArray.push(response.data);
 
-                //Change the state
-                this.setState( {
-                    factories: newArray
-                });
+                    //Change the state
+                    this.setState( {
+                        factories: newArray
+                    });
 
-                //Notify other clients of the change
-                this.sendRefresh();
+                    //Notify other clients of the change
+                    this.sendRefresh();
+                }
             })
             .catch(error => {
                 console.log(error);
