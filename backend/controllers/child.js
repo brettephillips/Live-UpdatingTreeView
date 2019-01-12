@@ -17,7 +17,7 @@ exports.remove = (req, res) => {
     if(typeof req.params.id === 'undefined') {
         error['reason'] = "Missing property";
         res.status(400).json(error);
-    } else if(req.params.id === 0) {
+    } else if(req.params.id.length === 0) {
         error['reason'] = "There is a missing value";
         res.status(400).json(error);
     } else if(isNaN(req.params.id)) {
@@ -52,7 +52,7 @@ exports.create = (req, res) => {
     if(typeof req.body.FactoryId === 'undefined' || typeof req.body.number === 'undefined') {
         error['reason'] = "Missing property";
         res.status(400).json(error);
-    } else if(req.body.FactoryId === 0 || req.body.number === 0) {
+    } else if(req.body.FactoryId.length === 0 || req.body.number.length === 0) {
         error['reason'] = "There is a missing value";
         res.status(400).json(error);
     } else if(isNaN(req.body.FactoryId) || isNaN(req.body.number)) {

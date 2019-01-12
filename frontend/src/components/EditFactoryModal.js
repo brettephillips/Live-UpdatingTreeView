@@ -56,7 +56,7 @@ export class EditFactoryModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <CustomButton handleShow={this.handleShow} style="warning" name="Edit" />
+                <CustomButton handleShow={this.handleShow} color="warning" name="Edit" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Factory</Modal.Title>

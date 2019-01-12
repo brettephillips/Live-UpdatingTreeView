@@ -14,7 +14,7 @@ export class Child extends Component {
         //Keep the state of the children
         this.state = {
             children: this.props.children,
-            show: true
+            show: false
         };
 
         //Create bindings

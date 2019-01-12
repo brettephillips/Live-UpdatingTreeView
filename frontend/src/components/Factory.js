@@ -141,9 +141,9 @@ export class Factory extends Component {
      * @param {*} event 
      */
     deleteFactory = (event) => {
-        var factId = event.target.id;
+        var factId = parseInt(event.target.id);
 
-        axios.delete('http://localhost:3001/api/factories/'+parseInt(factId))
+        axios.delete('http://localhost:3001/api/factories/'+factId)
             .then(response => {
                 //If a successfull response, then update the UI
                 if(response.status === 200) {
@@ -151,7 +151,7 @@ export class Factory extends Component {
 
                     //Get the index of the factory
                     for(var i = 0; i < this.state.factories.length; i++) {
-                        if(this.state.factories[i]["id"] == factId) {
+                        if(this.state.factories[i]["id"] === factId) {
                             index = i;
                         }
                     }
@@ -185,7 +185,7 @@ export class Factory extends Component {
 
         //Loop and get the factory that is being edited
         for(var i = 0; i < this.state.factories.length; i++) {
-            if(this.state.factories[i].id == factId) {
+            if(this.state.factories[i]['id'] === factId) {
                 factory = this.state.factories[i];
             }
         }
@@ -226,21 +226,10 @@ export class Factory extends Component {
             .then(response => {
                 //If a successfull response, then update the UI
                 if(response.status === 200) {
-                    //Create an object to replace the existing one
-                    var obj = {
-                        id: factId,
-                        name: name,
-                        lower_bound: lowerBound,
-                        upper_bound: upperBound,
-                        Children: []
-                    };
-
                     //Get the index of the factory
                     for(var i = 0; i < this.state.factories.length; i++) {
                         //Update the state
-                        if(this.state.factories[i]["id"] == factId) {
-                            this.state.factories[i] = obj;
-
+                        if(this.state.factories[i]["id"] === factId) {
                             this.removeChildren(0, factId);
                         }
                     }

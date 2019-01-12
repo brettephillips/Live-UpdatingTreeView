@@ -56,7 +56,7 @@ export class GenerateChildrenModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <CustomButton handleShow={this.handleShow} style="default" name="Generate" />
+                <CustomButton handleShow={this.handleShow} color="default" name="Generate" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Generate Children</Modal.Title>

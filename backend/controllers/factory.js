@@ -70,7 +70,7 @@ exports.update = (req, res) => {
     if(typeof req.body.name === 'undefined' || typeof req.body.lower_bound === 'undefined' || typeof req.body.upper_bound === 'undefined' || typeof req.params.id === 'undefined') {
         error['reason'] = "Missing property";
         res.status(400).json(error);
-    } else if(req.body.name.length === 0 || req.body.lower_bound.length === 0 || req.body.upper_bound.length === 0 || req.params.id === 0) {
+    } else if(req.body.name.length === 0 || req.body.lower_bound.length === 0 || req.body.upper_bound.length === 0 || req.params.id.length === 0) {
         error['reason'] = "There is a missing value";
         res.status(400).json(error);
     } else if(req.body.lower_bound > req.body.upper_bound) {
@@ -114,7 +114,7 @@ exports.remove = (req, res) => {
     if(typeof req.params.id === 'undefined') {
         error['reason'] = "Missing property";
         res.status(400).json(error);
-    } else if(req.params.id === 0) {
+    } else if(req.params.id.length === 0) {
         error['reason'] = "There is a missing value";
         res.status(400).json(error);
     } else if(isNaN(req.params.id)) {

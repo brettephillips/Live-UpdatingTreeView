@@ -58,7 +58,7 @@ export class AddFactoryModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <CustomButton handleShow={this.handleShow} style="default" name="Add Factory" />
+                <CustomButton handleShow={this.handleShow} color="default" name="Add Factory" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Factory</Modal.Title>

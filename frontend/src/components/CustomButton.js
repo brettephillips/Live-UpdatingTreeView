@@ -11,7 +11,7 @@ export class CustomButton extends Component {
     //Render the elements
     render() {
         return(
-            <Button onClick={this.props.handleShow} bsStyle={this.props.style} className="pull-right">{this.props.name}</Button>
+            <Button onClick={this.props.handleShow} bsStyle={this.props.color} className="pull-right">{this.props.name}</Button>
         );
     }
 }
