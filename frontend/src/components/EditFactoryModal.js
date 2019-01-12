@@ -1,7 +1,7 @@
 //Import needed packages
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { EditFactoryButton } from './EditFactoryButton';
+import { CustomButton } from './CustomButton';
 import { EditFactoryForm } from './EditFactoryForm';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -56,7 +56,7 @@ export class EditFactoryModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <EditFactoryButton handleShow={this.handleShow} />
+                <CustomButton handleShow={this.handleShow} style="warning" name="Edit" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Factory</Modal.Title>

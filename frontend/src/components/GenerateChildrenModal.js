@@ -1,10 +1,10 @@
 //Import needed packages
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { GenerateChildrenButton } from './GenerateChildrenButton';
+import { CustomButton } from './CustomButton';
 import { GenerateChildrenForm } from './GenerateChildrenForm';
 import 'bootstrap/dist/css/bootstrap.css';
-import './AddFactoryButton.css';
+import './CustomButton.css';
 
 /**
  * Class that will handle the modal.
@@ -56,7 +56,7 @@ export class GenerateChildrenModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <GenerateChildrenButton handleShow={this.handleShow} />
+                <CustomButton handleShow={this.handleShow} style="default" name="Generate" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Generate Children</Modal.Title>

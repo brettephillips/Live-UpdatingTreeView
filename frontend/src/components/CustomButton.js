@@ -5,13 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './CustomButton.css';
 
 /**
- * Class that will render the 'Delete' button.
+ * Class that will render a custom button.
  */
-export class RemoveFactoryButton extends Component {
+export class CustomButton extends Component {
     //Render the elements
     render() {
         return(
-            <Button bsStyle="danger" onClick={this.props.deleteFactory} id={this.props.factoryID} className="pull-right">Delete</Button>
+            <Button onClick={this.props.handleShow} bsStyle={this.props.style} className="pull-right">{this.props.name}</Button>
         );
     }
 }

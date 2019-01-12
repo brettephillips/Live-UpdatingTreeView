@@ -1,10 +1,10 @@
 //Import needed packages
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { AddFactoryButton } from './AddFactoryButton';
+import { CustomButton } from './CustomButton';
 import { AddFactoryForm } from './AddFactoryForm';
 import 'bootstrap/dist/css/bootstrap.css';
-import './AddFactoryButton.css';
+import './CustomButton.css';
 
 /**
  * Class that will handle the modal.
@@ -58,7 +58,7 @@ export class AddFactoryModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <AddFactoryButton handleShow={this.handleShow} />
+                <CustomButton handleShow={this.handleShow} style="default" name="Add Factory" />
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Factory</Modal.Title>
