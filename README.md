@@ -25,8 +25,6 @@
 1. Clone or download the repo
 2. Navigate to the Live-UpdatingTreeView folder > backend folder > config folder and open config.json
 3. Edit the database configurations (NOTE: If you do not do this, then it will not run)
-4. Navigate to the Live-UpdatingTreeView folder > backend folder > open app.js
-5. Uncomment the lines that are commented (NOTE: This will enable you to call the api locally)
 >Running The Server - http://localhost:3001
 6. cd backend
 7. npm install
