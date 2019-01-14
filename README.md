@@ -8,6 +8,16 @@
 * All of a factory’s existing child nodes should be removed upon each new generation
 * Your project should be secure, validate inputs, and protect against injections
 
+## Production Environment
+* https://live-updating-tree-view.herokuapp.com/ - frontend
+* https://live-updating-tree-view-api.herokuapp.com/ - API
+* NOTE: Application may take some time to load due to heroku putting the server to sleep. You may get an "Application Error" on the first visit. If you see this, then reload the page.
+> API Endpoints
+* /api/factories - GET, POST
+* /api/factories/:id - PUT, DELETE
+* /api/children - POST
+* /api/children/:id - DELETE
+
 ## Technologies
 > Backend
 * Node.js and express
