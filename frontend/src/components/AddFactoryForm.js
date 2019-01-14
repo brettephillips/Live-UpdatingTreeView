@@ -52,12 +52,12 @@ export class AddFactoryForm extends Component {
             this.setState( {
                 validationName: 'error'
             });
-        } else if(this.state.lowerBound.length === 0 || isNaN(this.state.lowerBound)) {
+        } else if(this.state.lowerBound === 0 || isNaN(this.state.lowerBound) || this.state.lowerBound < 1 || this.state.lowerBound > 15) {
             this.setState( {
                 validationLowerBound: 'error',
                 validationName: null
             });
-        } else if(this.state.upperBound.length === 0 || isNaN(this.state.upperBound)) {
+        } else if(this.state.upperBound === 0 || isNaN(this.state.upperBound) || this.state.upperBound < 1 || this.state.upperBound > 15) {
             this.setState( {
                 validationUpperBound: 'error',
                 validationName: null,
