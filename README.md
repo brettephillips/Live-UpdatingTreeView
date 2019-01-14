@@ -8,6 +8,16 @@
 * All of a factory’s existing child nodes should be removed upon each new generation
 * Your project should be secure, validate inputs, and protect against injections
 
+## Production Environment
+* https://live-updating-tree-view.herokuapp.com/ - frontend
+* https://live-updating-tree-view-api.herokuapp.com/ - API
+* NOTE: Application may take some time to load due to heroku putting the server to sleep. You may get an "Application Error" on the first visit. If you see this, then reload the page.
+> API Endpoints
+* /api/factories - GET, POST
+* /api/factories/:id - PUT, DELETE
+* /api/children - POST
+* /api/children/:id - DELETE
+
 ## Technologies
 > Backend
 * Node.js and express
@@ -25,8 +35,6 @@
 1. Clone or download the repo
 2. Navigate to the Live-UpdatingTreeView folder > backend folder > config folder and open config.json
 3. Edit the database configurations (NOTE: If you do not do this, then it will not run)
-4. Navigate to the Live-UpdatingTreeView folder > backend folder > open app.js
-5. Uncomment the lines that are commented (NOTE: This will enable you to call the api locally)
 >Running The Server - http://localhost:3001
 6. cd backend
 7. npm install
